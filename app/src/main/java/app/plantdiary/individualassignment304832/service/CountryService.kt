@@ -12,8 +12,8 @@ class CountryService{
     suspend fun fetchCountries(): List<Country>? {
         return withContext(Dispatchers.IO) {
             val retrofit = RetrofitClientInstance.retrofitInstance?.create(ICountryDAO::class.java)
-            val plants = async { retrofit?.fetchCountries() }
-            return@withContext plants.await()?.awaitResponse()?.body()
+            val countries = async { retrofit?.fetchCountries() }
+            return@withContext countries.await()?.awaitResponse()?.body()
         }
     }
 }

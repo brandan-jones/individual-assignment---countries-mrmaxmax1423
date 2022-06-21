@@ -29,22 +29,14 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.window.PopupProperties
 import androidx.lifecycle.Observer
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
 
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModel<MainViewModel>()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //start koin
-        startKoin{
-            androidLogger()
-            androidContext(this@MainActivity)
-            modules(appModule)
-        }
         setContent {
             viewModel.fetchCountries()
             val countries by viewModel.countries.observeAsState(initial = emptyList())
